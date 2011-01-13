@@ -35,6 +35,8 @@ static struct kconf_id kconf_id_array[] = {
 	{ "defconfig_list",	T_OPT_DEFCONFIG_LIST,	TF_OPTION },
 	{ "env",		T_OPT_ENV,		TF_OPTION },
 	{ "allnoconfig_y",	T_OPT_ALLNOCONFIG_Y,	TF_OPTION },
+	{ "pushd",		T_PUSHD,		TF_COMMAND },
+	{ "popd",		T_POPD,			TF_COMMAND },
 };
 
 #define KCONF_ID_ARRAY_SIZE (sizeof(kconf_id_array)/sizeof(struct kconf_id))
