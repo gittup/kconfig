@@ -1,9 +1,8 @@
 CURSES_LOC = <ncurses.h>
 # Don't know why lex.backup is created. I'm not passing in -b.
-: zconf.l |> flex -L -P%B -o %o %f && rm -f lex.backup |> lex.zconf.c
-: zconf.gperf |> gperf < %f > %o |> zconf.hash.c
+: zconf.l |> flex -L -P%B -o %o %f && rm -f lex.backup |> zconf.lex.c
 : zconf.y |> bison -l -b %B -p %B %f |> %B.tab.c
-: foreach conf.c mconf.c zconf.tab.c | zconf.hash.c lex.zconf.c |> gcc -c %f -o %o -DCURSES_LOC='$(CURSES_LOC)' |> %B.o
+: foreach conf.c mconf.c zconf.tab.c | zconf.lex.c |> gcc -c %f -o %o -DYYDEBUG=1 -DCURSES_LOC='$(CURSES_LOC)' |> %B.o
 : lxdialog/*.o mconf.o zconf.tab.o |> gcc %f -o %o -lncurses |> tup-mconf
 : conf.o zconf.tab.o |> gcc %f -o %o |> tup-conf
 .gitignore
